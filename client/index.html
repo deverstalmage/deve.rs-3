@@ -3,8 +3,89 @@
     <title>Devers Talmage</title>
     <link rel="icon" href="floppy.png" sizes="32x32" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      .bg {
+        overflow: hidden;
+      }
+      pre {
+        margin: 0;
+        color: #66C56F;
+        background-color: #222;
+      }
+    </style>
   </head>
   <body>
+    <div class="bg">
+      <pre>
+        import './style.scss';
+
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import Slider from 'react-slider';
+
+        class App extends React.Component {
+          constructor(props) {
+            super(props);
+            this.onSliderChange = this.onSliderChange.bind(this);
+
+            this.state = {
+              sliderValue: 50,
+            };
+
+            const increaseSliderValue = () => {
+              if (this.state.sliderValue < 100) this.setState({ sliderValue: this.state.sliderValue + 1 });
+              else clearInterval(intervalFn);
+            }
+
+            const intervalFn = setInterval(() => increaseSliderValue(), 16);
+          }
+
+          onSliderChange(sliderValue) {
+            this.setState({ sliderValue });
+          }
+
+          render() {
+            return (
+              &lt;div&gt;
+                &lt;div className=&quot;bg&quot;&gt;&lt;/div&gt;
+                &lt;div className=&quot;container&quot; style={{opacity: this.state.sliderValue / 100}}&gt;
+                  &lt;div className=&quot;content&quot;&gt;
+                    &lt;img className=&quot;me&quot; src=&quot;devers.png&quot; /&gt;
+                    &lt;div className=&quot;info&quot;&gt;
+                      &lt;h1&gt;Devers Talmage&lt;/h1&gt;
+                      &lt;h4&gt;Software engineer 🌎 Boston, MA&lt;/h4&gt;
+                      &lt;ul&gt;
+                        &lt;li&gt;
+                          📧 &lt;a href=&quot;mailto:deverstalmage@gmail.com&quot;&gt;Email&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                          👤 &lt;a href=&quot;https://www.linkedin.com/in/deverstalmage&quot;&gt;LinkedIn&lt;/a&gt;
+                        &lt;/li&gt;
+                        &lt;li&gt;
+                          💻 &lt;a href=&quot;https://github.com/deverstalmage&quot;&gt;GitHub&lt;/a&gt;
+                        &lt;/li&gt;
+                      &lt;/ul&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;slider-container&quot;&gt;
+                  &lt;Slider value={this.state.sliderValue} onChange={this.onSliderChange}&gt;🔮&lt;/Slider&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            );
+          }
+        }
+
+        ReactDOM.render(
+          <App />,
+          document.getElementById('app')
+        );
+      </pre>
+    </div>
     <div id="app"></div>
     <script src="assets/bundle.js"></script>
   </body>
