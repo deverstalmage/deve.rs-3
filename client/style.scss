@@ -11,6 +11,20 @@ $primary: #66C56F;
   }
 }
 
+@keyframes fadeInAndOut {
+  0% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
+
 @mixin small {
   @media screen and (max-width: $break-small) { @content; }
 }
@@ -20,7 +34,10 @@ $primary: #66C56F;
   animation-duration: 1s;
 }
 
-
+@mixin fadeInAndOut {
+  animation-name: fadeInAndOut;
+  animation-duration: 1.2s;
+}
 
 
 
@@ -139,9 +156,14 @@ a {
   padding: 20px;
   position: absolute;
   width: 100%;
-  opacity: 1;
+  opacity: 0.3;
+  transition: opacity 0.2s ease-in;
 
-  @include fadeIn;
+  @include fadeInAndOut;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .slider {
